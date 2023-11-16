@@ -1,9 +1,6 @@
 const apiUrl = "https://www.fatecpp.edu.br/todos-professores/";
 
-// ====================
-
-async function informacoesAPI() 
-{
+async function informacoesAPI() {
     try 
     {
         const response = await fetch(apiUrl);
@@ -25,26 +22,26 @@ async function informacoesAPI()
     }
 }
 
-async function BuscarEmailAPI(emailInput) 
+async function buscarUsuarioPorEmail(emailInput) 
 {
     try 
     {
-        const response = await fetch(apiUrl);
-        
-        if (response.status === 200) 
+        const userData = await informacoesAPI();
+        if (userData) 
         {
-            const userData = await response.json();
             const foundUser = userData.find(user => user.email === emailInput);
-            return foundUser ? true : false;
+            return foundUser || null;
         } 
         else 
         {
-            return false;
+            return null;
         }
     } 
     catch (error) 
     {
-        console.error('Erro ao obter informações sobre o email: ' + error);
-        return false;
+        console.error('Erro ao buscar usuário por email: ' + error);
+        return null;
     }
 }
+
+export { buscarUsuarioPorEmail };

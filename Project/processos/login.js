@@ -1,42 +1,39 @@
-// =============================
-import { BuscarEmailAPI } from './api.js';
-// =============================
+import { buscarUsuarioPorEmail } from './api.js';
 
-const emailInput = document.getElementById('email');
-const senhaInput = document.getElementById('senha');
-
-document.getElementById('logar').addEventListener('click', Logar);
-
-async function Logar() 
+document.getElementById('logar').addEventListener('click', async function () 
 {
-    const loginEmail = emailInput.value;
-    const loginSenha = senhaInput.value;
+    const emailInput = document.getElementById('email').value;
+    const senhaInput = document.getElementById('senha').value;
 
-    if (!loginEmail || !loginSenha) 
+    if (!emailInput || !senhaInput) 
     {
         alert('Por favor, preencha o email e a senha!');
         return;
     }
 
-    // Verifica se existe o email na API
-    const emailExists = await api.BuscarEmailAPI(loginEmail);
-
-    if (emailExists) 
+    try 
     {
-        if (loginSenha === '1234')
+        const usuario = await buscarUsuarioPorEmail(emailInput);
+
+        if (usuario) 
         {
-            window.location.href = 'home.php';
-            alert(`Bem-vindo ${emailExists.nome}!`);
-        }
-        else
+            if (senhaInput === '1234') 
+            {
+                window.location.href = 'home.php';
+                alert(`Bem-vindo ${usuario.nome}!`);
+            } 
+            else 
+            {
+                alert('Ops! Parece que a senha está incorreta');
+            }
+        } 
+        else 
         {
-            alert('Ops! Parece que a senha esta incorreta');
-            senhaInput.value = '';
+            alert('Ops! As credenciais estão incorretas');
         }
     } 
-    else 
+    catch (error) 
     {
-        alert('Ops! As credenciais estão incorretas');
-        senhaInput.value = '';
+        console.error('Erro ao realizar login: ' + error);
     }
-}
+});
