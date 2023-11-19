@@ -1,6 +1,7 @@
-const apiUrl = "https://www.fatecpp.edu.br/todos-professores/";
+const apiUrl = "https://fatecpp.edu.br/wp-json/fatec/professores";
 
-async function informacoesAPI() {
+async function informacoesAPI() 
+{
     try 
     {
         const response = await fetch(apiUrl);

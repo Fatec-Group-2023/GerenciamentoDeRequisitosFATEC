@@ -19,7 +19,7 @@ document.getElementById('logar').addEventListener('click', async function ()
         {
             if (senhaInput === '1234') 
             {
-                window.location.href = 'home.php';
+                window.location.href = 'menu.html';
                 alert(`Bem-vindo ${usuario.nome}!`);
             } 
             else 
