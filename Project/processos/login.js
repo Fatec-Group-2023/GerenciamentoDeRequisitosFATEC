@@ -17,7 +17,12 @@ document.getElementById('logar').addEventListener('click', async function ()
 
         if (usuario) 
         {
-            if (senhaInput === '1234') 
+            if (emailInput === 'alvaro.ferraz@fatec.sp.gov.br') 
+            {
+                window.location.href = 'adminMenu.html';
+                alert(`Bem-vindo ${usuario.nome}!`);
+            }
+            else if (senhaInput === 'fatec2023') 
             {
                 window.location.href = 'menu.html';
                 alert(`Bem-vindo ${usuario.nome}!`);
